@@ -5,6 +5,8 @@ import javax.persistence.Table;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.elm.expense_tracker_api.dto.ExpenseResponse;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.http.ResponseEntity;
@@ -18,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ExpenseController {
 
 
-    // @PostMapping
-    // public ResponseEntity< createExpense(@RequestBody String entity) {
-    //     //TODO: process POST request
+    @PostMapping
+    public ResponseEntity<ExpenseResponse> () {
+        //TODO: process POST request
         
-    //     return entity;
-    // }
+        return entity;
+    }
     
 
 }
