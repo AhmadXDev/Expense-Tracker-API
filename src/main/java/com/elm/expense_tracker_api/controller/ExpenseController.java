@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ExpenseController {
 
 
-    @PostMapping
-    public ResponseEntity<ExpenseResponse> () {
-        //TODO: process POST request
+    // @PostMapping
+    // public ResponseEntity<ExpenseResponse> () {
+    //     //TODO: process POST request
         
-        return entity;
-    }
+    //     return entity;
+    // }
     
 
 }

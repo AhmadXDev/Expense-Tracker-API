@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +36,6 @@ public class Expense extends BaseEntity {
     @NotNull
     private BigDecimal amount; 
 
-    @Size(min = 3, max = 3)
     @Pattern(regexp = "[A-Z]{3}")
     @NotNull
     private String currency; 
