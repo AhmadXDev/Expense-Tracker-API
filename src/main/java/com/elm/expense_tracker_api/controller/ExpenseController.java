@@ -1,6 +1,5 @@
 package com.elm.expense_tracker_api.controller;
 
-import javax.persistence.Table;
 import javax.validation.Valid;
 
 import com.elm.expense_tracker_api.service.ExpenseService;
@@ -8,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.elm.expense_tracker_api.dto.ExpenseRequest;
-import com.elm.expense_tracker_api.dto.ExpenseResponse;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.elm.expense_tracker_api.dto.request.ExpenseRequest;
+import com.elm.expense_tracker_api.dto.response.ExpenseResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,9 +1,8 @@
-package com.elm.expense_tracker_api.dto;
+package com.elm.expense_tracker_api.dto.request;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import com.elm.expense_tracker_api.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,6 +14,6 @@ public class ExpenseRequest {
     private String description; 
     private BigDecimal amount; 
     private String currency; 
-    private Category category;
+    private Long categoryId;
     private LocalDate expenseDate;
 }
