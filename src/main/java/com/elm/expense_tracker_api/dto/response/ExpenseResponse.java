@@ -22,7 +22,7 @@ public class ExpenseResponse {
                 expense.getTitle(),
                 expense.getAmount(),
                 expense.getCurrency(),
-                expense.
+                expense.getCategory().getId(), 
                 expense.getExpenseDate()
         );
     }
