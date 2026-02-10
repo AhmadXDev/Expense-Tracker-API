@@ -1,14 +1,15 @@
-package com.elm.expense_tracker_api.service;
+package com.elm.expensetracker.service;
 
-import com.elm.expense_tracker_api.dto.request.ExpenseRequest;
-import com.elm.expense_tracker_api.dto.response.ExpenseResponse;
-import com.elm.expense_tracker_api.model.Category;
-import com.elm.expense_tracker_api.model.Expense;
+import com.elm.expensetracker.dto.request.ExpenseRequest;
+import com.elm.expensetracker.dto.response.ExpenseResponse;
+import com.elm.expensetracker.exception.ResourceNotFoundException;
+import com.elm.expensetracker.model.Category;
+import com.elm.expensetracker.model.Expense;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.elm.expense_tracker_api.repository.CategoryRepository;
-import com.elm.expense_tracker_api.repository.ExpenseRepository;
+import com.elm.expensetracker.repository.CategoryRepository;
+import com.elm.expensetracker.repository.ExpenseRepository;
 
 @Service
 public class ExpenseService {

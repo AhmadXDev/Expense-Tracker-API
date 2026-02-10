@@ -1,4 +1,4 @@
-package com.elm.expense_tracker_api.model;
+package com.elm.expensetracker.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

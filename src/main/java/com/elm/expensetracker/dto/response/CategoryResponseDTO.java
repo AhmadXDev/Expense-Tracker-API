@@ -1,4 +1,4 @@
-package com.elm.expense_tracker_api.dto.response;
+package com.elm.expensetracker.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

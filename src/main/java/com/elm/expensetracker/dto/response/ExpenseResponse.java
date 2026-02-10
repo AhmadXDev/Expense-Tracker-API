@@ -1,9 +1,9 @@
-package com.elm.expense_tracker_api.dto.response;
+package com.elm.expensetracker.dto.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import com.elm.expense_tracker_api.model.Expense;
+import com.elm.expensetracker.model.Expense;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

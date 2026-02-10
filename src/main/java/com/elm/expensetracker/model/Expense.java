@@ -1,4 +1,4 @@
-package com.elm.expense_tracker_api.model;
+package com.elm.expensetracker.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -47,7 +47,7 @@ public class Expense extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     @NotNull
-    private Category category; 
+    private Category category;
 
     @PastOrPresent
     @NotNull
