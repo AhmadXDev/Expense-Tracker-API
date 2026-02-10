@@ -3,12 +3,7 @@ package com.elm.expensetracker.dto.request;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +21,7 @@ public class ExpenseRequest {
 
     @NotNull(message = "Amount is required")
     @Positive(message = "Amount must be positive")
+    @Digits(integer = 17, fraction = 2, message = "Amount must have maximum of 17 digits and 2 decimal places ")
     private BigDecimal amount; 
 
     @Pattern(regexp = "[A-Z]{3}")

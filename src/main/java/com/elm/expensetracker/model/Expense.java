@@ -3,54 +3,43 @@ package com.elm.expensetracker.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
+
 public class Expense extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    private Long id;
 
-    @NotNull
-    private String title; 
+    @Column(nullable = false, length = 100)
+    private String title;
 
-    private String description; 
+    @Column(length = 200)
+    private String description;
 
-    @Positive
-    @NotNull
-    private BigDecimal amount; 
+    @Column(nullable = false, precision = 19, scale = 2)
+    private BigDecimal amount;
 
-    @Pattern(regexp = "[A-Z]{3}")
-    @NotNull
-    private String currency; 
+    @Column(nullable = false, length = 3)
+    private String currency;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
-    @NotNull
     private Category category;
 
-    @PastOrPresent
-    @NotNull
-    private LocalDate expenseDate; 
-
+    @Column(name = "expense_date", nullable = false)
+    private LocalDate expenseDate;
 }

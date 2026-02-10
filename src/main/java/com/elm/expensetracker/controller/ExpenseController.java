@@ -3,7 +3,7 @@ package com.elm.expensetracker.controller;
 import javax.validation.Valid;
 
 import com.elm.expensetracker.service.ExpenseService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import com.elm.expensetracker.dto.request.ExpenseRequest;
@@ -14,17 +14,15 @@ import org.springframework.http.ResponseEntity;
 
 
 @RestController
-@RequestMapping("/expenses")
+@RequestMapping("/expense")
+@RequiredArgsConstructor
 public class ExpenseController {
-
-    @Autowired
-    private ExpenseService expenseService;
+    private final ExpenseService expenseService;
 
     //Create an Expense
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<ExpenseResponse> createExpense(@Valid @RequestBody ExpenseRequest request) {
          ExpenseResponse response = expenseService.createExpense(request);
-
          return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
