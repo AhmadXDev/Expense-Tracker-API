@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @AllArgsConstructor
-public class CategoryRequest {
+public class CreateCategoryRequest {
 
     @NotBlank(message = "Category must have a name")
     @Size(min = 1, max = 30, message = "name characters must be between 1 to 30")

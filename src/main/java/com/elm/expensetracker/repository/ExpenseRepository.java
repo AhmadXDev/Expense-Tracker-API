@@ -13,9 +13,9 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     List<Expense> findByCategory_Id(Long categoryId);
 
     // return one expense by Date
-    Expense findByExpenseDate(LocalDate expenseDate);
+    List<Expense> findByExpenseDate(LocalDate expenseDate);
 
     // return expense larger by 100
-    Expense findByAmountGreaterThan(BigDecimal amountIsGreaterThan);
+    List<Expense> findByAmountGreaterThan(BigDecimal amountIsGreaterThan);
 
 }
