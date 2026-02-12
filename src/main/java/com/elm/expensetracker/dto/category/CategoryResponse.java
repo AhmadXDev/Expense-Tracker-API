@@ -1,4 +1,4 @@
-package com.elm.expensetracker.dto.response;
+package com.elm.expensetracker.dto.category;
 
 import com.elm.expensetracker.model.Category;
 import lombok.AllArgsConstructor;

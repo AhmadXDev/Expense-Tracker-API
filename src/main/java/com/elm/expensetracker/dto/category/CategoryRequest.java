@@ -1,10 +1,8 @@
-package com.elm.expensetracker.dto.request;
+package com.elm.expensetracker.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 

@@ -10,6 +10,7 @@ import javax.persistence.PreUpdate;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
 @MappedSuperclass
 @Getter
@@ -21,6 +22,9 @@ public class BaseEntity {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
+    @Column(name = "deleted", nullable = true)
+    private boolean deleted = false;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -30,6 +34,10 @@ public class BaseEntity {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
+    }
+
+    public void markAsDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
     
 }

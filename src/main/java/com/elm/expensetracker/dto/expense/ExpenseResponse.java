@@ -1,4 +1,4 @@
-package com.elm.expensetracker.dto.response;
+package com.elm.expensetracker.dto.expense;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
