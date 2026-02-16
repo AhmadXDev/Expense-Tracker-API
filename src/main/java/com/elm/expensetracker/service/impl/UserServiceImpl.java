@@ -5,11 +5,13 @@ import com.elm.expensetracker.dto.user.UserResponse;
 import com.elm.expensetracker.exception.ResourceNotFoundException;
 import com.elm.expensetracker.model.User;
 import com.elm.expensetracker.repository.UserRepository;
-import com.elm.expensetracker.service.UserService;
+import com.elm.expensetracker.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -54,5 +56,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", username));
+    }
+
+    @Override
+    public List<UserResponse> getAllUsers() {
+        List<User> users = userRepository.findAll();
+
+        return users.stream()
+                .map(UserResponse::from)
+                .toList();
     }
 }

@@ -3,16 +3,14 @@ package com.elm.expensetracker.service.impl;
 import com.elm.expensetracker.dto.expense.CreateExpenseRequest;
 import com.elm.expensetracker.dto.expense.UpdateExpenseRequest;
 import com.elm.expensetracker.dto.expense.ExpenseResponse;
-import com.elm.expensetracker.exception.ResourceNotFoundException;
 import com.elm.expensetracker.model.Category;
 import com.elm.expensetracker.model.Expense;
-import com.elm.expensetracker.service.CategoryService;
-import com.elm.expensetracker.service.ExpenseService;
+import com.elm.expensetracker.service.interfaces.CategoryService;
+import com.elm.expensetracker.service.interfaces.ExpenseService;
 import com.elm.expensetracker.service.base.BaseEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.elm.expensetracker.repository.CategoryRepository;
 import com.elm.expensetracker.repository.ExpenseRepository;
 import org.springframework.transaction.annotation.Transactional;
 

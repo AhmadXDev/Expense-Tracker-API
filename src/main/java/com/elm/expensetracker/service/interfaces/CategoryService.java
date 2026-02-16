@@ -1,4 +1,4 @@
-package com.elm.expensetracker.service;
+package com.elm.expensetracker.service.interfaces;
 
 import com.elm.expensetracker.dto.category.CategoryResponse;
 import com.elm.expensetracker.dto.category.CreateCategoryRequest;

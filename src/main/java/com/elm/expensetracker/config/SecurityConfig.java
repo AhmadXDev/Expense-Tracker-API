@@ -57,6 +57,7 @@ public class SecurityConfig {
                         .antMatchers(HttpMethod.PATCH, "/category/**").hasRole("ADMIN")
                         .antMatchers(HttpMethod.PUT, "/category/**").hasRole("ADMIN")
                         .antMatchers(HttpMethod.DELETE, "/category/**").hasRole("ADMIN")
+                        .antMatchers("/admin/**").hasRole("ADMIN")
 
                         // ================== EXPENSE ENDPOINTS ==================
                         .antMatchers("/expense").authenticated()

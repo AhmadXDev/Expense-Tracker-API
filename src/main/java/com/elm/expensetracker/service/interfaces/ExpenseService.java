@@ -1,9 +1,8 @@
-package com.elm.expensetracker.service;
+package com.elm.expensetracker.service.interfaces;
 
 import com.elm.expensetracker.dto.expense.CreateExpenseRequest;
 import com.elm.expensetracker.dto.expense.ExpenseResponse;
 import com.elm.expensetracker.dto.expense.UpdateExpenseRequest;
-import com.elm.expensetracker.model.Expense;
 
 import java.util.List;
 

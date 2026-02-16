@@ -2,7 +2,7 @@ package com.elm.expensetracker.controller;
 
 import com.elm.expensetracker.dto.user.RegisterRequest;
 import com.elm.expensetracker.dto.user.UserResponse;
-import com.elm.expensetracker.service.UserService;
+import com.elm.expensetracker.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

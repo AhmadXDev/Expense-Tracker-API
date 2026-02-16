@@ -4,7 +4,7 @@ import javax.validation.Valid;
 
 import com.elm.expensetracker.dto.expense.CreateExpenseRequest;
 import com.elm.expensetracker.dto.expense.UpdateExpenseRequest;
-import com.elm.expensetracker.service.ExpenseService;
+import com.elm.expensetracker.service.interfaces.ExpenseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
