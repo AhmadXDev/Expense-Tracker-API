@@ -38,4 +38,11 @@ public class Expense extends BaseEntity {
 
     @Column(name = "expense_date", nullable = false)
     private LocalDate expenseDate;
+
+    // NEW: Many expenses belong to one user (ownership relationship)
+    // FetchType.LAZY: User data is loaded only when accessed (performance optimization)
+    // nullable = false: Every expense MUST have an owner
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

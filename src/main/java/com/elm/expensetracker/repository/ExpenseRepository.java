@@ -1,6 +1,7 @@
 package com.elm.expensetracker.repository;
 
 import com.elm.expensetracker.model.Expense;
+import com.elm.expensetracker.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +20,10 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     // return expense larger by 100
     List<Expense> findByAmountGreaterThan(BigDecimal amountIsGreaterThan);
+
+    // NEW: Find all expenses belonging to a specific user
+    // Spring Data JPA automatically implements this query method
+    // Translates to: SELECT * FROM expense WHERE user_id = ?
+    List<Expense> findByUser(User user);
 
 }
