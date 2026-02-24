@@ -18,6 +18,8 @@ public class ExpenseResponse {
     private final Long categoryId;
     private final String categoryName;
     private final LocalDate expenseDate;
+    private final Long userId;
+    private final String username;
 
     public static ExpenseResponse from(Expense expense) {
         return new ExpenseResponse(
@@ -28,7 +30,9 @@ public class ExpenseResponse {
                 expense.getCurrency(),
                 expense.getCategory().getId(),
                 expense.getCategory().getName(),
-                expense.getExpenseDate()
+                expense.getExpenseDate(),
+                expense.getUser().getId(),
+                expense.getUser().getUsername()
         );
     }
 

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -14,10 +15,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(nullable = false, unique = true, length = 50)
     private String username;
@@ -33,6 +30,9 @@ public class User extends BaseEntity{
 
     @Column(nullable = false)
     private String roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Expense> expenses;
 
     public Set<String> getRolesSet() {
         Set<String> roleSet = new HashSet<>();

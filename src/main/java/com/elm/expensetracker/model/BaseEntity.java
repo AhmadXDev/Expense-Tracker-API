@@ -3,10 +3,7 @@ package com.elm.expensetracker.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Getter
 @Setter
 public class BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
