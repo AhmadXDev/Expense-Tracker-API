@@ -1,0 +1,9 @@
+---
+description: 
+alwaysApply: true
+---
+
+This project is to learn Java, Springboot, Backend Development, and good Coding Practices. 
+So I need you to make sure that you: 
+- Always expalin the code for me to learn how to code independently
+- When you recommend code for me to build, if some related code is working but is bad/bad-practice, then you also recommend code for any related code that is bad. Meaning, don't build code on top of bad code that I have, so we have a complete good practice project at the end.

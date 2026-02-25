@@ -3,6 +3,7 @@ package com.elm.expensetracker.service.impl;
 import com.elm.expensetracker.dto.expense.CreateExpenseRequest;
 import com.elm.expensetracker.dto.expense.UpdateExpenseRequest;
 import com.elm.expensetracker.dto.expense.ExpenseResponse;
+import com.elm.expensetracker.exception.ResourceNotFoundException;
 import com.elm.expensetracker.exception.UnauthorizedException;
 import com.elm.expensetracker.model.Category;
 import com.elm.expensetracker.model.Expense;
@@ -10,9 +11,10 @@ import com.elm.expensetracker.model.User;
 import com.elm.expensetracker.security.SecurityUtils;
 import com.elm.expensetracker.service.interfaces.CategoryService;
 import com.elm.expensetracker.service.interfaces.ExpenseService;
-import com.elm.expensetracker.service.base.BaseEntityService;
 import com.elm.expensetracker.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.elm.expensetracker.repository.ExpenseRepository;
@@ -22,10 +24,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ExpenseServiceImpl extends BaseEntityService<Expense, ExpenseRepository> implements ExpenseService {
+public class ExpenseServiceImpl implements ExpenseService{
     private final ExpenseRepository expenseRepository;
     private final CategoryService categoryService;
     private final UserService userService;
+
+    private static final Logger log = LoggerFactory.getLogger(ExpenseServiceImpl.class);
 
     public ExpenseResponse createExpense(CreateExpenseRequest request) {
         Category category = categoryService.findById(request.getCategoryId());
@@ -44,6 +48,7 @@ public class ExpenseServiceImpl extends BaseEntityService<Expense, ExpenseReposi
                 .build();
 
         Expense savedExpense = expenseRepository.save(newExpense);
+        log.info("Expense created: id={}, title={}, username={}", savedExpense.getId(), savedExpense.getTitle(), currentUsername);
         return ExpenseResponse.from(savedExpense);
     }
 
@@ -77,6 +82,7 @@ public class ExpenseServiceImpl extends BaseEntityService<Expense, ExpenseReposi
         String currentUsername = SecurityUtils.getCurrentUserName();
 
         if (!expense.getUser().getUsername().equals(currentUsername)) {
+            log.warn("Access denied to expense: expenseId={}, currentUser={}", expense.getId(), currentUsername);
             throw new UnauthorizedException("You don't have permission to access this expense");
         }
 
@@ -89,6 +95,7 @@ public class ExpenseServiceImpl extends BaseEntityService<Expense, ExpenseReposi
         validateOwnership(expense);
         if(expense.isDeleted()) return;
         expense.markAsDeleted(true);
+        log.info("Expense deleted (soft): id={}", id);
     }
 
     @Override
@@ -105,12 +112,10 @@ public class ExpenseServiceImpl extends BaseEntityService<Expense, ExpenseReposi
     }
 
     @Override
-    protected ExpenseRepository getRepository() {
-        return expenseRepository;
+    public Expense findById(Long id) {
+        return expenseRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Expense with id: " + id + "is not found"));
     }
 
-    @Override
-    protected String getEntityName() {
-        return "Expense";
-    }
 }

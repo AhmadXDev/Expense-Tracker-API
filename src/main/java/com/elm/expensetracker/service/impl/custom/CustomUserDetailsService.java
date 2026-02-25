@@ -1,4 +1,4 @@
-package com.elm.expensetracker.service.impl;
+package com.elm.expensetracker.service.impl.custom;
 
 import com.elm.expensetracker.model.User;
 import com.elm.expensetracker.repository.UserRepository;
@@ -23,7 +23,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
          User user = userRepository.findByUsername(username)
-                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+                 .orElseThrow(() ->
+                         new UsernameNotFoundException("User not found with username: " + username));
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())
@@ -34,12 +35,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     }
 
-        private Collection<? extends GrantedAuthority> getAuthorities(User user) {
-            Set<String> roles = user.getRolesSet();
+            private Collection<? extends GrantedAuthority> getAuthorities(User user) {
+                Set<String> roles = user.getRolesSet();
 
-            return roles.stream()
-                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                    .collect(Collectors.toSet());
-        }
+                return roles.stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                        .collect(Collectors.toSet());
+            }
 
 }

@@ -1,6 +1,6 @@
 package com.elm.expensetracker.config;
 import com.elm.expensetracker.security.JwtAuthenticationFilter;
-import com.elm.expensetracker.service.impl.CustomUserDetailsService;
+import com.elm.expensetracker.service.impl.custom.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -50,6 +48,11 @@ public class SecurityConfig {
                         .antMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
 
+                        // ================== ACTUATOR ENDPOINTS ==================
+                        .antMatchers("/actuator/health").permitAll()
+                        .antMatchers("/actuator/info").permitAll()
+                        .antMatchers("actuator/**").authenticated()
+
                         // ================== CATEGORY ENDPOINTS ==================
                         .antMatchers(HttpMethod.GET, "/category/**").authenticated()
                         .antMatchers(HttpMethod.POST, "/category/**").hasRole("ADMIN")
@@ -64,6 +67,7 @@ public class SecurityConfig {
                         // ================= ALL OTHER ENDPOINTS ==================
                         .anyRequest().authenticated()
                 )
+
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

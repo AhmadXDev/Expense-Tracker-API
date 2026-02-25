@@ -3,6 +3,8 @@ package com.elm.expensetracker.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
+
+    private static final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
 
     @Value("${jwt.secret:MySecretKeyForJWTTokenGenerationMustBeLongEnough12345}")
     private String jwtSecret;
@@ -65,19 +69,19 @@ public class JwtTokenProvider {
             return true;
         } catch (MalformedJwtException ex) {
             // Token structure is invalid
-            System.err.println("Invalid JWT token: " + ex.getMessage());
+            log.debug("Invalid JWT token (malformed): {}", ex.getMessage());
         } catch (ExpiredJwtException ex) {
             // Token is expired
-            System.err.println("Invalid JWT token: " + ex.getMessage());
+            log.debug("Invalid JWT token (expired): {}", ex.getMessage());
         } catch (UnsupportedJwtException ex) {
             // Token type is not supported
-            System.err.println("Invalid JWT token: " + ex.getMessage());
+            log.debug("Invalid JWT token (unsupported): {}", ex.getMessage());
         } catch (IllegalArgumentException ex) {
             // Token string is empty or null
-            System.err.println("Invalid JWT token: " + ex.getMessage());
+            log.debug("Invalid JWT token (empty/null): {}", ex.getMessage());
         } catch (SignatureException ex) {
             // Signature does not match, token was tampered
-            System.err.println("Invalid JWT token: " + ex.getMessage());
+            log.debug("Invalid JWT token (token tampered?): {}", ex.getMessage());
         }
 
         return false;
