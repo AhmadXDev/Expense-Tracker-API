@@ -30,7 +30,7 @@ public class ExpenseController {
     }
 
     //Get an expense
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ExpenseResponse> getExpense(@PathVariable Long id) {
         ExpenseResponse response = expenseService.getExpense(id);
         return ResponseEntity.ok(response);

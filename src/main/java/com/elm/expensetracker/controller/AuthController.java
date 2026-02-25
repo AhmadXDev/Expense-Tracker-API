@@ -29,13 +29,12 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtAuthResponse> login(
-            @Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<JwtAuthResponse> login(@Valid @RequestBody LoginRequest request) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()
+                        request.getUsername(),
+                        request.getPassword()
                 )
         );
 
@@ -49,7 +48,7 @@ public class AuthController {
         JwtAuthResponse response = JwtAuthResponse.builder()
                 .accessToken(jwt)
                 .tokenType("Bearer")
-                .username(loginRequest.getUsername())
+                .username(request.getUsername())
                 .roles(roles)
                 .build();
 
