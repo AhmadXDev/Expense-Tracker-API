@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-@Profile({"dev", "qa"})
+// @Profile({"prod", "dev", "qa"})
 public class DataInitializer implements CommandLineRunner {
 
     private final UserRepository userRepository;
