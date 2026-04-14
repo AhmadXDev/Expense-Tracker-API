@@ -1,4 +1,4 @@
-package com.elm.expensetracker.service.impl;
+package com.elm.expensetracker.service.impl.custom;
 
 import com.elm.expensetracker.model.User;
 import com.elm.expensetracker.repository.UserRepository;
@@ -35,12 +35,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     }
 
-        private Collection<? extends GrantedAuthority> getAuthorities(User user) {
-            Set<String> roles = user.getRolesSet();
+            private Collection<? extends GrantedAuthority> getAuthorities(User user) {
+                Set<String> roles = user.getRolesSet();
 
-            return roles.stream()
-                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                    .collect(Collectors.toSet());
-        }
+                return roles.stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                        .collect(Collectors.toSet());
+            }
 
 }

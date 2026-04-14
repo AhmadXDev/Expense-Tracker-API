@@ -13,6 +13,8 @@ import com.elm.expensetracker.service.interfaces.CategoryService;
 import com.elm.expensetracker.service.interfaces.ExpenseService;
 import com.elm.expensetracker.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.elm.expensetracker.repository.ExpenseRepository;
@@ -26,6 +28,8 @@ public class ExpenseServiceImpl implements ExpenseService{
     private final ExpenseRepository expenseRepository;
     private final CategoryService categoryService;
     private final UserService userService;
+
+    private static final Logger log = LoggerFactory.getLogger(ExpenseServiceImpl.class);
 
     public ExpenseResponse createExpense(CreateExpenseRequest request) {
         Category category = categoryService.findById(request.getCategoryId());
@@ -44,6 +48,7 @@ public class ExpenseServiceImpl implements ExpenseService{
                 .build();
 
         Expense savedExpense = expenseRepository.save(newExpense);
+        log.info("Expense created: id={}, title={}, username={}", savedExpense.getId(), savedExpense.getTitle(), currentUsername);
         return ExpenseResponse.from(savedExpense);
     }
 
@@ -77,6 +82,7 @@ public class ExpenseServiceImpl implements ExpenseService{
         String currentUsername = SecurityUtils.getCurrentUserName();
 
         if (!expense.getUser().getUsername().equals(currentUsername)) {
+            log.warn("Access denied to expense: expenseId={}, currentUser={}", expense.getId(), currentUsername);
             throw new UnauthorizedException("You don't have permission to access this expense");
         }
 
@@ -89,6 +95,7 @@ public class ExpenseServiceImpl implements ExpenseService{
         validateOwnership(expense);
         if(expense.isDeleted()) return;
         expense.markAsDeleted(true);
+        log.info("Expense deleted (soft): id={}", id);
     }
 
     @Override
